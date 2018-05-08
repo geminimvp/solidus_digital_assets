@@ -2,7 +2,7 @@ SUPPORTED_IMAGE_FORMATS = ["image/jpg", "image/jpeg", "image/png", "image/gif", 
 SUPPORTED_IMAGES_REGEX = Regexp.new('\A(' + SUPPORTED_IMAGE_FORMATS.join('|') + ')\Z')
 
 module Spree
-  class DigitalAsset < Spree::Base
+  class DigitalAsset < Asset
     belongs_to :folder
     has_many :assets
 
@@ -17,6 +17,10 @@ module Spree
     before_post_process :image?
     before_validation :assign_default_name, on: :create
 
+    def name
+      return File.basename(attachment_file_name.to_s, '.*').titleize.truncate(255)
+    end
+    
     private
       def image?
         (attachment_content_type =~ SUPPORTED_IMAGES_REGEX).present?

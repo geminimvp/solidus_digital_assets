@@ -1,0 +1,10 @@
+<div id="select-zone">
+  <%= form_for [:admin, @product, Spree::Image.new],
+      html: { multipart: true, id: 'select-form' } do |f| %>
+    <div data-hook="file" class="field">
+      <%= f.label :attachment %><br>
+      <%= f.file_field :attachment, multiple: '' %>
+      <%= f.hidden_field :viewable_id, value: @product.master.id %>
+    </div>
+  <% end %>
+</div>

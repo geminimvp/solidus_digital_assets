@@ -77,8 +77,8 @@ Spree::Admin::BaseHelper.class_eval do
       id: digital_asset.id,
       name: digital_asset.name,
       size: number_to_human_size(digital_asset.attachment_file_size),
-      created_on: digital_asset.created_at.to_date.to_formatted_s(:long),
-      modified_on: digital_asset.updated_at.to_date.to_formatted_s(:long),
+      created_on: digital_asset.created_at&.to_date&.to_formatted_s(:long),
+      modified_on: digital_asset.updated_at&.to_date&.to_formatted_s(:long),
       related_products: related_products(digital_asset)
     }
   end
@@ -86,8 +86,8 @@ Spree::Admin::BaseHelper.class_eval do
   def related_products(digital_asset)
     products = {}
     digital_asset.assets.each do |asset|
-      product = asset.viewable.product
-      products[product.id] = { slug: product.slug, name: product.name }
+      product = asset.viewable&.product
+      products[product.id] = { slug: product.slug, name: product.name } unless product.nil?
     end
     products.values
   end

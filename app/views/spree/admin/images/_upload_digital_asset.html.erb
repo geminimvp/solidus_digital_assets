@@ -35,7 +35,11 @@
 
   </div>
 </div>
-<%= f.hidden_field :digital_asset_id, id: 'digital_asset_id_field' %>
+<div data-hook="file" class="hidden">
+  <%= file_field :attachment, multiple: '' %>
+  <%= hidden_field :viewable_id, value: @product.master.id %>
+</div>
+<%= hidden_field :digital_asset_id, id: 'digital_asset_id_field' %>
 <script>
  $(document).ready(function() {
      var assetModal = $('#associate_asset_modal');
@@ -53,8 +57,35 @@
 
      // Overlay is broken due to the position where modal is inserted detach and attach back again.
      assetModal.on('dblclick', '.asset-area', function() {
-         $('#associate_asset_modal').modal('hide');
+        var id = $(this).find('.attachment').attr('data-id');
+        assignAsset(id);
+        $('#associate_asset_modal').modal('hide');
      });
+
+     assignAsset = function (id, src) {
+      var formData = new FormData(),
+        that = this;
+
+      formData.append('digital_asset_id', id);
+  
+      // send the image to the server
+      Spree.ajax({
+        url: window.location.pathname,
+        type: "POST",
+        dataType: 'script',
+        data: formData,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,  // tell jQuery not to set contentType
+      }).done(function() {
+        // that.set({progress: 100});
+        assetModal.detach();
+        $('body').after(assetModal);
+      }).error(function(jqXHR, textStatus, errorThrown) {
+        // that.set({serverError: true});
+        console.log(JSON.stringify(jqXHR));
+      });
+    }
+    
      assetModal.detach();
      $('body').after(assetModal);
 
