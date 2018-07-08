@@ -6,7 +6,7 @@ module Spree
     belongs_to :folder
     has_many :assets
 
-    has_attached_file :attachment, styles: { small: '100x100>' },
+    has_attached_file :attachment, styles: { mini: '48x48>', small: '100x100>' },
                       url: '/spree/digital_assets/:id/:style/:basename.:extension',
                       path: ':rails_root/public/spree/digital_assets/:id/:style/:basename.:extension'
 
