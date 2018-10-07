@@ -12,7 +12,9 @@ module Spree
 
       def create
         @object.assign_attributes(permitted_resource_params)
-        @object.position = 1
+        if @object.folder.nil?
+          @object.folder = spree_folder
+        end
         if @object.save
           render layout: false
         else
@@ -28,6 +30,14 @@ module Spree
 
         def filter_digital_assets_by_folder
           @digital_assets = @digital_assets.where(folder: current_folder)
+        end
+
+        def spree_folder
+          if current_folder.present?
+            current_folder
+          else
+            Spree::Folder.find_or_create_by(name: "Digital Assets")
+          end
         end
 
         def current_folder

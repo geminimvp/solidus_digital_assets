@@ -8,7 +8,7 @@ describe Spree::Admin::DigitalAssetsController do
   let(:children) { [folder] }
   let(:user) { mock_model(Spree::User) }
   let(:digital_asset) {
-    mock_model(Spree::DigitalAsset, :position= => true, :position => 1)
+    mock_model(Spree::DigitalAsset, :position= => true, :position => 1, :folder => :folder)
   }
   let(:folder_id) { '1' }
   let(:digital_asset_folder_path) { '' }
