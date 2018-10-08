@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # Provides basic authentication functionality for testing parts of your engine
-gem 'solidus', github: 'geminimvp/solidus', branch: 'image_overrides'
+gem 'solidus', github: 'geminimvp/solidus', branch: 'gemini_master'
 gem 'solidus_auth_devise', github: 'solidusio/solidus_auth_devise'
 gem 'rails', '< 5.2.1'
 gem 'remotipart', '~> 1.2'
