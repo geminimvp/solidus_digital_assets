@@ -85,10 +85,10 @@ Spree::Admin::BaseHelper.class_eval do
 
   def related_products(digital_asset)
     products = {}
-    digital_asset.assets.each do |asset|
-      product = asset.viewable.product if asset.viewable.present?
-      products[product.id] = { slug: product.slug, name: product.name } if product.present?
-    end
+    #digital_asset.assets.each do |asset|
+    #  product = asset.viewable.product if asset.viewable.present?
+    #  products[product.id] = { slug: product.slug, name: product.name } if product.present?
+    #end
     products.values
   end
 
