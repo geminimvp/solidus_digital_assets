@@ -4,9 +4,11 @@ SUPPORTED_IMAGE_FORMATS = ["image/jpg", "image/jpeg", "image/png", "image/gif", 
 SUPPORTED_IMAGES_REGEX = Regexp.new('\A(' + SUPPORTED_IMAGE_FORMATS.join('|') + ')\Z')
 
 module Spree
-  class DigitalAsset < Spree::Base
+  class DigitalAsset < Spree::Asset
 
     self.table_name = "spree_digital_assets"
+    attr_accessor :position
+    attr_accessor :type
 
     belongs_to :folder
     has_many :assets
@@ -25,6 +27,8 @@ module Spree
 
     before_post_process :image?
     before_validation :assign_default_name, on: :create
+    before_validation :assign_default_type, on: :create
+    before_validation :assign_default_position, on: :create
 
     private
       def image?
@@ -33,6 +37,14 @@ module Spree
 
       def assign_default_name
         self.name = File.basename(attachment_file_name.to_s, '.*').titleize.truncate(255) if name.blank?
+      end
+
+      def assign_default_type
+        self.type = 'Spree::DigitalAsset'
+      end
+
+      def assign_default_position
+        self.position = 1
       end
   end
 end
