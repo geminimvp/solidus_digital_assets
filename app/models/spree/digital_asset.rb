@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
-SUPPORTED_IMAGE_FORMATS = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
-SUPPORTED_IMAGES_REGEX = Regexp.new('\A(' + SUPPORTED_IMAGE_FORMATS.join('|') + ')\Z')
-
 module Spree
   class DigitalAsset < Spree::Asset
 
+    SUPPORTED_IMAGE_FORMATS = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"].freeze
+    SUPPORTED_IMAGES_REGEX = Regexp.new('\A(' + SUPPORTED_IMAGE_FORMATS.join('|') + ')\Z').freeze
+
     self.table_name = "spree_digital_assets"
-    attr_accessor :position
-    attr_accessor :type
+    attr_accessor :position, :type, :viewable_type, :viewable_id, :attachment_width, :attachment_height, :alt, :digital_asset_id
 
     belongs_to :folder
     has_many :assets

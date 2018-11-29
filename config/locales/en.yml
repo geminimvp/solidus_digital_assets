@@ -12,3 +12,4 @@ en:
     admin:
       tab:
         digital_assets: 'Digital Assets'
+    no_digital_assets_found: No digital assets found

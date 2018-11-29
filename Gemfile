@@ -6,9 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 # Provides basic authentication functionality for testing parts of your engine
-gem 'solidus', github: 'geminimvp/solidus', branch: 'gemini_master'
+gem 'solidus', github: 'geminimvp/solidus', branch: 'gemini_master_v280'
 gem 'solidus_auth_devise', github: 'solidusio/solidus_auth_devise'
-gem 'rails', '< 5.2.1'
+gem 'rails', '< 6.0'
 gem 'remotipart', '~> 1.2'
 gem 'jquery-fileupload-rails', '~> 0.4.6'
 
