@@ -11,7 +11,7 @@ module Spree
       end
 
       def create
-        @object.assign_attributes(permitted_resource_params)
+        @object.assign_attributes(permitted_resource_params)        
         if @object.folder.nil?
           @object.folder = spree_folder
         end
@@ -23,7 +23,8 @@ module Spree
       end
 
       def destroy
-        redirect_to action: :index
+        @object.destroy
+        redirect_to action: :index, folder_id: @object.folder_id
       end
 
       private
@@ -36,12 +37,13 @@ module Spree
           if current_folder.present?
             current_folder
           else
-            Spree::Folder.find_or_create_by(name: "Digital Assets")
+            Spree::Folder.find_or_create_by(name: "Product Images")
           end
         end
 
         def current_folder
-          @current_folder ||= Spree::Folder.find_by(id: params[:folder_id])
+          id = params.dig(:image, :folder_id) || params.dig(:folder_id)
+          @current_folder ||= Spree::Folder.find_by(id: id)
         end
 
         def current_folder_children
