@@ -1,4 +1,5 @@
 <div  class='col-md-12'>
+  <% if @current_folder.present? %>
   <div class='row'>
     <fieldset class="col-12 no-border-bottom">
       <div id="upload-zone">
@@ -14,6 +15,7 @@
 
             <%= f.file_field :attachment, multiple: false, class: 'hidden' %>
             <input type="hidden" value='<%= @digital_asset.id %>' name="image[viewable_id]" id="image_viewable_id">
+            <input type="hidden" value='<%= @current_folder.id %>' name="image[folder_id]" id="image_folder_id">
           </label>
         <% end %>
       </div>
@@ -21,6 +23,7 @@
       <div id="progress-zone" class="row"></div>
     </fieldset>
   </div>
+  <% end %>
 
   <div class="row">
     <div id='folder_assets' data-current="<%= @current_folder.try(:id) %>"class='col-md-9' data-next-url='<%= digital_assets_next_page_path(@digital_assets, @current_folder) %>'>
@@ -29,6 +32,7 @@
       <% end %>
       <%= render partial: 'spree/admin/shared/digital_asset', collection: @digital_assets %>
     </div>
+    <% if @current_folder.present? %>
     <div class="col-md-3  asset-details hide">
       <div class="panel panel-default">
       <div class="panel-heading"><strong id="asset-name"></strong></div>
@@ -41,5 +45,6 @@
         </div>
       </div>
     </div>
+    <% end %>
   </div>
 </div>

@@ -11,7 +11,7 @@ module Spree
       end
 
       def create
-        @object.assign_attributes(permitted_resource_params)
+        @object.assign_attributes(permitted_resource_params)        
         if @object.folder.nil?
           @object.folder = spree_folder
         end
@@ -41,7 +41,8 @@ module Spree
         end
 
         def current_folder
-          @current_folder ||= Spree::Folder.find_by(id: params[:folder_id])
+          id = params.dig(:image, :folder_id) || params.dig(:folder_id)
+          @current_folder ||= Spree::Folder.find_by(id: id)
         end
 
         def current_folder_children
