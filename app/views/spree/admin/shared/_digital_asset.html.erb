@@ -12,7 +12,7 @@
   <ul class="dropdown-menu">
     <% if can? :manage, digital_asset %>
       <li>
-        <%= link_to '', spree.admin_digital_asset_path(digital_asset), method: :delete, class: 'delete_digital_asset_button with-tip text-danger fa fa-trash', data: { confirm: Spree.t(:confirm_delete), original_title: 'Delete' } %>
+        <%= link_to '<i class="fa fa-trash"></i>'.html_safe(), spree.admin_digital_asset_path(digital_asset), method: :delete, class: 'delete_digital_asset_button with-tip', data: { confirm: Spree.t(:confirm_delete), original_title: 'Delete' } %>
       </li>
       <li role="separator" class="divider"></li>
       <li>
