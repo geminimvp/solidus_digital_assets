@@ -23,7 +23,9 @@ module Spree
       end
 
       def destroy
-        redirect_to action: :index
+        # folder_id = current_digital_asset.folder_id
+        current_digital_asset.destroy
+        redirect_to action: :index, folder_id: current_digital_asset.folder_id
       end
 
       private
@@ -47,6 +49,10 @@ module Spree
 
         def current_folder_children
           @current_folder_children = current_folder.try(:children) || Spree::Folder.where(parent_id: nil)
+        end
+
+        def current_digital_asset
+          @current_digital_asset ||= Spree::DigitalAsset.find_by(id: params[:id])
         end
 
         def build_digital_asset
