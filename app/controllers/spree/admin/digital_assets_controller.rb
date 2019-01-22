@@ -23,7 +23,6 @@ module Spree
       end
 
       def destroy
-        # folder_id = current_digital_asset.folder_id
         current_digital_asset.destroy
         redirect_to action: :index, folder_id: current_digital_asset.folder_id
       end
