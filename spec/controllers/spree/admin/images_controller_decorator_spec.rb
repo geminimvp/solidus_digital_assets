@@ -17,6 +17,7 @@ describe Spree::Admin::ImagesController do
     allow(product).to receive(:variants).and_return(variants)
     allow(variants).to receive(:collect).and_return(variants)
     allow(product).to receive(:master).and_return(variant)
+    allow(product).to receive(:digital_assets).and_return(digital_assets)
     allow(variant).to receive(:id).and_return(1)
     allow(variants).to receive(:insert).and_return(variants)
   end

@@ -18,7 +18,15 @@ FactoryBot.define do
 
   factory :digital_asset, class: 'Spree::DigitalAsset' do
     name { 'abc' }
-    folder_id { 1 }
+    folder
+
+    trait :with_attachment do
+      after(:build) do |digital_asset|
+        cat_path = Spree::Core::Engine.root.join('spec', 'fixtures', 'thinking-cat.jpg')
+        attachment_io = File.open(cat_path)
+        digital_asset.attachment.attach(io: attachment_io, filename: 'thinking-cat.jpg')
+      end
+    end
   end
 
 end

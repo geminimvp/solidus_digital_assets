@@ -3,11 +3,8 @@ require 'spec_helper'
 describe Spree::Asset, :type => :model do
 
   let(:folder) { Spree::Folder.create(name: 'folder') }
-  let(:digital_asset_path) {
-    Spree::Core::Engine.root + 'spec/fixtures/thinking-cat.jpg'
-  }
   let(:digital_asset) {
-    create(:digital_asset, folder: folder, attachment: File.new(digital_asset_path))
+    create(:digital_asset, :with_attachment, folder: folder)
   }
   let(:image) { Spree::Image.new }
 
@@ -40,7 +37,9 @@ describe Spree::Asset, :type => :model do
         image.save
       end
 
-      it { expect(image.attachment_file_name).to eq(digital_asset.attachment_file_name) }
+      it {
+        expect(image.attachment_file_name).to eq(digital_asset.attachment.filename.to_s)
+      }
     end
 
     context 'when invalid digital_asset_id' do

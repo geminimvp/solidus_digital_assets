@@ -11,11 +11,17 @@ module Spree
       end
 
       def create
-        @object.assign_attributes(permitted_resource_params)        
+        @object.assign_attributes(permitted_resource_params)
         if @object.folder.nil?
           @object.folder = spree_folder
         end
         if @object.save
+          if params[:image] && image_params.present?
+            Spree::Image.create(image_params).tap do |img|
+              img.digital_asset_id = @object.id
+              img.save!
+            end
+          end
           render layout: false
         else
           render json: { errors: @object.errors.full_messages.to_sentence }, status: 422
@@ -29,6 +35,10 @@ module Spree
 
       private
 
+        def image_params
+          params.require(:image).permit(permitted_resource_params)
+        end
+
         def filter_digital_assets_by_folder
           @digital_assets = @digital_assets.where(folder: current_folder)
         end
@@ -37,7 +47,7 @@ module Spree
           if current_folder.present?
             current_folder
           else
-            Spree::Folder.find_or_create_by(name: "Product Images")
+            Spree::Folder.product_images_folder
           end
         end
 

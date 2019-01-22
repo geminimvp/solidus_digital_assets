@@ -1,5 +1,7 @@
 Spree::Image.class_eval do
 
+  belongs_to :digital_asset
+
   private
 
   def attachment_accepted?

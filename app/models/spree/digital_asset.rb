@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'file_validators'
+
 module Spree
   class DigitalAsset < Spree::Asset
 
@@ -12,38 +14,34 @@ module Spree
     belongs_to :folder
     has_many :assets
 
-    has_attached_file :attachment,
-                      styles: { mini: '48x48>', small: '100x100>', product: '240x240>', large: '600x600>' },
-                      default_style: :product,
-                      default_url: 'noimage/:style.png',
-                      url: '/spree/digital_assets/:id/:style/:basename.:extension',
-                      path: ':rails_root/public/spree/digital_assets/:id/:style/:basename.:extension',
-                      convert_options: { all: '-strip -auto-orient -colorspace sRGB' }
-
-    do_not_validate_attachment_file_type :attachment
+    has_one_attached :attachment
 
     validates :name, :attachment, :folder, presence: true
 
-    before_post_process :image?
+    validates :attachment, file_content_type: {
+                allow: SUPPORTED_IMAGE_FORMATS,
+                if: -> { attachment.attached? }
+              }
+
     before_validation :assign_default_name, on: :create
-    before_validation :assign_default_type, on: :create
     before_validation :assign_default_position, on: :create
 
+    def image?
+      attachment.attached?
+    end
+
     private
-      def image?
-        (attachment_content_type =~ SUPPORTED_IMAGES_REGEX).present?
-      end
 
       def assign_default_name
-        self.name = File.basename(attachment_file_name.to_s, '.*').titleize.truncate(255) if name.blank?
+        self.name ||= default_name
       end
 
-      def assign_default_type
-        self.type = 'Spree::DigitalAsset'
+      def default_name
+        File.basename(attachment.filename.to_s, '.*').titleize.truncate(255)
       end
 
       def assign_default_position
-        self.position = 1
+        self.position ||= 1
       end
   end
 end

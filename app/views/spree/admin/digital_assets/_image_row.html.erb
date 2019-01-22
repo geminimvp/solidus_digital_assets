@@ -1,0 +1,36 @@
+<tr id="<%= spree_dom_id image %>" data-hook="images_row">
+  <td>
+    <% if can?(:update_positions, Spree::Image) %>
+      <span class="handle"></span>
+    <% end %>
+  </td>
+  <td>
+    <span class="modal-image-trigger" data-toggle="modal" data-target="#modal-image-<%= image.id %>">
+      <%= render 'spree/admin/shared/image', image: image, size: :mini %>
+    </span>
+    <%= render(
+          'spree/admin/shared/modal',
+          target: "modal-image-#{image.id}",
+          title: image.alt,
+          content: %{
+            <div class='align-center'>
+              #{image_tag(image.attachment.url(:large))}
+            </div>
+          }.html_safe
+        ) %>
+  </td>
+  <td class="actions">
+    <% if can?(:update, image) %>
+        <%= link_to I18n.t('spree.actions.save', api_variant_image_path(@product, image),
+                           data: { action: 'save' },
+                           class: 'btn btn-default btn-rounded btn-action-check' %>
+        <%= link_to I18n.t('spree.actions.cancel', nil,
+                           data: { action: 'cancel' },
+                           class: 'btn btn-default btn-rounded btn-action-cancel' %>
+        <%= link_to I18n.t('spree.actions.edit', nil,
+                           data: { action: 'edit' },
+                           class: 'btn btn-default btn-rounded btn-action-edit' %>
+
+    <% end %>
+  </td>
+</tr>

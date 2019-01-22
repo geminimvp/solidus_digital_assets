@@ -21,7 +21,6 @@ require 'factory_bot'
 require 'ffaker'
 require 'rspec/active_model/mocks'
 require 'shoulda-matchers'
-require "paperclip/matchers"
 require 'solidus_digital_assets/factories'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -51,7 +50,6 @@ RSpec.configure do |config|
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
-  config.include Paperclip::Shoulda::Matchers
 
   # == Requests support
   #
@@ -96,4 +94,8 @@ RSpec.configure do |config|
 
   config.fail_fast = ENV['FAIL_FAST'] || false
   config.order = "random"
+end
+
+Dummy::Application.configure do
+  config.active_storage.service = :test
 end
