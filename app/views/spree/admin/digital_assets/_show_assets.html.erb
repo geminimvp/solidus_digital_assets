@@ -1,4 +1,25 @@
 <table class="index sortable inline-editable-table" id="assets-table" data-hook="assets">
+  <colgroup>
+    <col style="width: 1%">
+    <col style="width: 9%">
+    <col style="width: 35%">
+    <% if @product.has_variants? %>
+      <col style="width: 35%">
+    <% end %>
+    <col style="width: 20%">
+  </colgroup>
+
+  <thead>
+  <tr data-hook="images_header">
+    <th></th>
+    <th></th>
+    <th><%= Spree::Variant.model_name.human %></th>
+    <% if @product.has_variants? %>
+      <th><%= Spree::Image.human_attribute_name(:alt) %></th>
+    <% end %>
+    <th class="actions"></th>
+  </tr>
+  </thead>
   <tbody>
   <%= render partial: 'image_row', collection: @product_assets, as: :image %>
   </tbody>
