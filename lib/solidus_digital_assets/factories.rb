@@ -9,7 +9,7 @@ FactoryBot.define do
   end
 
   factory :digital_asset, class: Spree::DigitalAsset do
-    name 'abc'
+    name { 'abc' }
   end
 
 end
