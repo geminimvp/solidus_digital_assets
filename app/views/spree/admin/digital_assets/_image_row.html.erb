@@ -1,0 +1,17 @@
+<tr data-hook="images_row">
+  <td>
+    <span class="modal-image-trigger" data-toggle="modal" data-target="#modal-image-<%= image.id %>">
+      <%= render 'spree/admin/shared/image', image: image, size: :mini %>
+    </span>
+    <%= render(
+          'spree/admin/shared/modal',
+          target: "modal-image-#{image.id}",
+          title: image.alt,
+          content: %{
+            <div class='align-center'>
+              #{image_tag(image.attachment.url(:large))}
+            </div>
+          }.html_safe
+        ) %>
+  </td>
+</tr>
