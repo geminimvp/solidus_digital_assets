@@ -50,10 +50,6 @@ module Spree
           @current_folder_children = current_folder.try(:children) || Spree::Folder.where(parent_id: nil)
         end
 
-        def current_digital_asset
-          @current_digital_asset ||= Spree::DigitalAsset.find_by(id: params[:id])
-        end
-
         def build_digital_asset
           @digital_asset = Spree::DigitalAsset.new(folder_id: @current_folder.try(:id))
         end
