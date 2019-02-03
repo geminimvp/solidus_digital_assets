@@ -16,6 +16,11 @@ module Spree
           @object.folder = spree_folder
         end
         if @object.save
+          Spree::Image.create(image_params).tap do |img|
+            img.type = "Spree::DigitalAsset"
+            img.digital_asset_id = @object.id
+            img.save!
+          end
           render layout: false
         else
           render json: { errors: @object.errors.full_messages.to_sentence }, status: 422
@@ -28,6 +33,10 @@ module Spree
       end
 
       private
+
+        def image_params
+          params.require(:image).permit(permitted_image_attributes)
+        end
 
         def filter_digital_assets_by_folder
           @digital_assets = @digital_assets.where(folder: current_folder)
