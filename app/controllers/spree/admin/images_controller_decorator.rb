@@ -4,13 +4,9 @@ Spree::Admin::ImagesController.class_eval do
   def create
     if digital_asset_params[:digital_asset_id].present?
       # user is adding an image using an existing DigitalAsset
-      product = Spree::Product.find_by(slug: params[:product_id])
-      @asset = Spree::Asset.find_by(digital_asset_id: digital_asset_params[:digital_asset_id])
-      variant = Spree::Variant.find_by(product: product)
-      asset_variant = Spree::AssetVariant.find_or_initialize_by(image_id: @asset.id, variant_id: variant.id)
+      asset_variant = Spree::AssetVariant.find_or_initialize_by(image_id: @asset.id, variant_id: @variant.id)
       if asset_variant.save!
-        render layout: false
-        # Missing template spree/admin/images/create !!!
+        redirect_back(fallback_location: root_path)
       else
         render json: { errors: 'Failed to save Image' }, status: 422
       end
@@ -32,11 +28,8 @@ Spree::Admin::ImagesController.class_eval do
             img.save!
           end
           render status: 201
-          # render layout: false, status: 201
-          # respond_with(@image, status: 201, default_template: :index)
         else
           render json: { errors: 'Failed to save Image' }, status: 422
-          # respond_with(@image, status: 422, default_template: :index)
         end
       end
     end
@@ -51,6 +44,14 @@ Spree::Admin::ImagesController.class_eval do
       product_id = params[:product_id]
       return nil if product_id.nil?
       @product ||= Spree::Product.find_by(slug: product_id)
+    end
+
+    def asset
+      @asset ||= Spree::Asset.find_by(digital_asset_id: digital_asset_params[:digital_asset_id])
+    end
+
+    def variant
+      @variant ||= Spree::Variant.find_by(product: product)
     end
 
     def image_params
