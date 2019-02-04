@@ -3,10 +3,19 @@ Spree::Admin::ImagesController.class_eval do
 
   def create
     if digital_asset_params[:digital_asset_id].present?
-      # retreive Digital asset by ID
-      # retrieve associated Image
-      # create a spree_asset_variant based on the Image
+      # user is adding an image using an existing DigitalAsset
+      product = Spree::Product.find_by(slug: params[:product_id])
+      @asset = Spree::Asset.find_by(digital_asset_id: digital_asset_params[:digital_asset_id])
+      variant = Spree::Variant.find_by(product: product)
+      asset_variant = Spree::AssetVariant.find_or_initialize_by(image_id: @asset.id, variant_id: variant.id)
+      if asset_variant.save!
+        render layout: false
+        # Missing template spree/admin/images/create !!!
+      else
+        render json: { errors: 'Failed to save Image' }, status: 422
+      end
     else
+      # user is uploading a new image
       save_and_create_digital_asset
     end
   end
