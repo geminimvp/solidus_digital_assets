@@ -4,11 +4,11 @@
 en:
   spree:
     folders:
-      editing_resource: 'Editing %{resource}'
-      success: 'Folder has been deleted successfully'
-      failure: '%{error_messages}'
-      new_sub_folder: 'New Sub Folder'
-      new_folder: 'New Folder'
+      editing_resource: "Editing %{resource}"
+      success: "Folder has been deleted successfully"
+      failure: "%{error_messages}"
+      new_sub_folder: "New Sub Folder"
+      new_folder: "New Folder"
     admin:
       tab:
         digital_assets: 'Digital Assets'
@@ -19,3 +19,4 @@ en:
           choose_files: 'Choose Files'
           drag_and_drop: 'Drag And Drop'
     no_digital_assets_found: 'No digital assets found'
+    new_image: "Upload Asset"

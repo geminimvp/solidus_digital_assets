@@ -4,7 +4,7 @@ Spree::Admin::ImagesController.class_eval do
   def create
     if digital_asset_params[:digital_asset_id].present?
       # user is adding an image using an existing DigitalAsset
-      asset_variant = Spree::AssetVariant.find_or_initialize_by(image_id: @asset.id, variant_id: @variant.id)
+      asset_variant = Spree::AssetVariant.find_or_initialize_by(image_id: asset.id, variant_id: variant.id)
       if asset_variant.save!
         redirect_back(fallback_location: root_path)
       else
