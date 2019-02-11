@@ -16,10 +16,12 @@ module Spree
           @object.folder = spree_folder
         end
         if @object.save
-          Spree::Image.create(image_params).tap do |img|
-            img.type = "Spree::DigitalAsset"
-            img.digital_asset_id = @object.id
-            img.save!
+          if params[:image] && image_params.present?
+            Spree::Image.create(image_params).tap do |img|
+              img.type = "Spree::DigitalAsset"
+              img.digital_asset_id = @object.id
+              img.save!
+            end
           end
           render layout: false
         else
@@ -36,6 +38,10 @@ module Spree
 
         def image_params
           params.require(:image).permit(permitted_image_attributes)
+        end
+
+        def permitted_image_attributes
+          ImagesController.permitted_image_attributes
         end
 
         def filter_digital_assets_by_folder
