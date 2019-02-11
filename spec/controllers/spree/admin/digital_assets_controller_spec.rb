@@ -181,7 +181,7 @@ describe Spree::Admin::DigitalAssetsController do
 
     describe 'Response' do
       context 'successfully saved' do
-        before { send_request(format: :js) }
+        before { send_request(format: :js, image: {}) }
 
         it { is_expected.to render_template :create }
         it { is_expected.to respond_with 200 }

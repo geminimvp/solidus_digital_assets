@@ -11,7 +11,7 @@ module Spree
       end
 
       def create
-        @object.assign_attributes(permitted_resource_params)        
+        @object.assign_attributes(permitted_resource_params)
         if @object.folder.nil?
           @object.folder = spree_folder
         end
