@@ -37,11 +37,7 @@ module Spree
       private
 
         def image_params
-          params.require(:image).permit(permitted_image_attributes)
-        end
-
-        def permitted_image_attributes
-          ImagesController.permitted_image_attributes
+          params.require(:image).permit(permitted_resource_params)
         end
 
         def filter_digital_assets_by_folder
