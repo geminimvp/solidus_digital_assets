@@ -8,7 +8,7 @@ Spree::Admin::ImagesController.class_eval do
       if asset_variant.save!
         redirect_back(fallback_location: root_path)
       else
-        rredirect_back(fallback_location: root_path, status: 422)
+        redirect_back(fallback_location: root_path, status: 422)
       end
     else
       # user is uploading a new image
