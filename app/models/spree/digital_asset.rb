@@ -16,8 +16,6 @@ module Spree
                       styles: { mini: '48x48>', small: '100x100>', product: '240x240>', large: '600x600>' },
                       default_style: :product,
                       default_url: 'noimage/:style.png',
-                      url: '/spree/digital_assets/:id/:style/:basename.:extension',
-                      path: ':rails_root/public/spree/digital_assets/:id/:style/:basename.:extension',
                       convert_options: { all: '-strip -auto-orient -colorspace sRGB' }
 
     do_not_validate_attachment_file_type :attachment
