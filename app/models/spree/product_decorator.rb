@@ -10,7 +10,8 @@ Spree::Product.class_eval do
       .to_sql
 
     results = ActiveRecord::Base.connection.exec_query(sql)
-    results.map { |result| Spree::DigitalAsset.new(result); }
+    d_assets = results.map { |result| Spree::DigitalAsset.new(result); }
+    d_assets || []
   end
 
   def digital_assets_table
