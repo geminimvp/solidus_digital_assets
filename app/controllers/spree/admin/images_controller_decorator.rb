@@ -23,7 +23,6 @@ Spree::Admin::ImagesController.class_eval do
         digital_asset.folder ||= Spree::Folder.product_images_folder
         if digital_asset.save!
           @image = scope.images.create(image_params).tap do |img|
-            # img.type = "Spree::DigitalAsset"
             img.digital_asset_id = digital_asset.id
             img.save!
           end
