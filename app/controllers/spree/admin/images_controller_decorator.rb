@@ -20,7 +20,7 @@ Spree::Admin::ImagesController.class_eval do
 
     def save_and_create_digital_asset
       @digital_asset = Spree::DigitalAsset.new(image_params).tap do |asset|
-        asset.folder = Spree::Folder.find_or_create_by(name: "Product Images") if asset.folder.nil?
+        asset.folder ||= Spree::Folder.product_images_folder
         if asset.save!
           @image = scope.images.create(image_params).tap do |img|
             img.type = "Spree::DigitalAsset"
@@ -68,7 +68,7 @@ Spree::Admin::ImagesController.class_eval do
       if current_folder.present?
         current_folder
       else
-        Spree::Folder.find_or_create_by(name: "Product Images")
+        Spree::Folder.product_images_folder
       end
     end
 

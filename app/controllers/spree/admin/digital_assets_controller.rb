@@ -48,7 +48,7 @@ module Spree
           if current_folder.present?
             current_folder
           else
-            Spree::Folder.find_or_create_by(name: "Product Images")
+            Spree::Folder.product_images_folder
           end
         end
 
