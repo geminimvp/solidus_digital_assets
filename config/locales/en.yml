@@ -10,6 +10,10 @@ en:
       new_sub_folder: "New Sub Folder"
       new_folder: "New Folder"
     admin:
+      digital_assets:
+        content:
+          choose_files: "Choose Files"
+          drag_and_drop: "Drag and Drop"
       tab:
         digital_assets: 'Digital Assets'
       tab_description:

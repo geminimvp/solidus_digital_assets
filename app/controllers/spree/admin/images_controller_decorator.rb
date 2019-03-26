@@ -19,12 +19,12 @@ Spree::Admin::ImagesController.class_eval do
   private
 
     def save_and_create_digital_asset
-      @digital_asset = Spree::DigitalAsset.new(image_params).tap do |asset|
-        asset.folder ||= Spree::Folder.product_images_folder
-        if asset.save!
+      @digital_asset = Spree::DigitalAsset.new(image_params).tap do |digital_asset|
+        digital_asset.folder ||= Spree::Folder.product_images_folder
+        if digital_asset.save!
           @image = scope.images.create(image_params).tap do |img|
-            img.type = "Spree::DigitalAsset"
-            img.digital_asset_id = asset.id
+            # img.type = "Spree::DigitalAsset"
+            img.digital_asset_id = digital_asset.id
             img.save!
           end
           render status: 201

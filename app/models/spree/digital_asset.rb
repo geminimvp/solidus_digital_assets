@@ -24,7 +24,6 @@ module Spree
 
     before_post_process :image?
     before_validation :assign_default_name, on: :create
-    before_validation :assign_default_type, on: :create
     before_validation :assign_default_position, on: :create
 
     private
@@ -33,15 +32,15 @@ module Spree
       end
 
       def assign_default_name
-        self.name = File.basename(attachment_file_name.to_s, '.*').titleize.truncate(255) if name.blank?
+        self.name ||= default_name
       end
 
-      def assign_default_type
-        self.type = 'Spree::DigitalAsset'
+      def default_name
+        File.basename(attachment_file_name.to_s, '.*').titleize.truncate(255)
       end
 
       def assign_default_position
-        self.position = 1
+        self.position ||= 1
       end
   end
 end

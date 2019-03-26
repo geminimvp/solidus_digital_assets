@@ -18,7 +18,6 @@ module Spree
         if @object.save
           if params[:image] && image_params.present?
             Spree::Image.create(image_params).tap do |img|
-              img.type = "Spree::DigitalAsset"
               img.digital_asset_id = @object.id
               img.save!
             end
