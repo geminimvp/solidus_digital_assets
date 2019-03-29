@@ -1,6 +1,6 @@
 <div class="text-center asset-area">
   <div class="digital-assets-image">
-    <%= image_tag(digital_asset.attachment.url(:small), class: 'img-thumbnail attachment digital_asset_attachment' ,
+    <%= image_tag(digital_asset.small, class: 'img-thumbnail attachment digital_asset_attachment' ,
                   data: asset_details(digital_asset), onerror: "$assetDetails.showFileGlyphicon(this)") %>
     <span class="hidden"><i class="fa fa-file file-icon"></i></span>
   </div>
@@ -20,6 +20,6 @@
       </li>
     <% end %>
     <li role="separator" class="divider"></li>
-    <li><%= link_to '<i class="fa fa-download"></i>'.html_safe(), digital_asset.attachment.url(:original, false), target: '_blank', class: 'with-tip', data: { original_title: 'Download' } %></li>
+    <li><%= link_to '<i class="fa fa-download"></i>'.html_safe(), digital_asset.attachment, target: '_blank', class: 'with-tip', data: { original_title: 'Download' } %></li>
   </ul>
 </div>

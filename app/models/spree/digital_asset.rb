@@ -30,6 +30,23 @@ module Spree
       attachment.attached?
     end
 
+    # Specific sizes of images
+    def mini
+      attachment.varian(resize_to_limit: [48, 48])
+    end
+
+    def small
+      attachment.variant(resize_to_limit: [100, 100])
+    end
+
+    def product
+      attachment.variant(resize_to_limit: [240, 240])
+    end
+
+    def large
+      attachment.variant(resize_to_limit: [600, 600])
+    end
+
     private
 
       def assign_default_name
