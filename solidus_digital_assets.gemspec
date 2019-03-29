@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'file_validators'
   s.add_dependency 'jquery-fileupload-rails', '~> 0.4.6'
-  s.add_dependency 'image_procesing'
+  s.add_dependency 'image_processing'
   s.add_dependency 'mini_magick'
   s.add_dependency 'solidus_core', '>= 2', '< 3'
   s.add_dependency 'remotipart', '~> 1.2'
