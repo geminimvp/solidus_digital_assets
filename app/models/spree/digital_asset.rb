@@ -32,7 +32,7 @@ module Spree
 
     # Specific sizes of images
     def mini
-      attachment.varian(resize_to_limit: [48, 48])
+      attachment.variant(resize_to_limit: [48, 48])
     end
 
     def small
