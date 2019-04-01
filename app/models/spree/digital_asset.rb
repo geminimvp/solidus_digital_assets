@@ -32,19 +32,19 @@ module Spree
 
     # Specific sizes of images
     def mini
-      attachment.variant(resize_to_limit: [48, 48])
+      attachment.variant(resize: [48, 48])
     end
 
     def small
-      attachment.variant(resize_to_limit: [100, 100])
+      attachment.variant(resize: [100, 100])
     end
 
     def product
-      attachment.variant(resize_to_limit: [240, 240])
+      attachment.variant(resize: [240, 240])
     end
 
     def large
-      attachment.variant(resize_to_limit: [600, 600])
+      attachment.variant(resize: [600, 600])
     end
 
     private
