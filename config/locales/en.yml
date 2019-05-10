@@ -12,4 +12,10 @@ en:
     admin:
       tab:
         digital_assets: 'Digital Assets'
-    no_digital_assets_found: No digital assets found
+      tab_description:
+        digital_assets: 'Digital Assets'
+      digital_assets:
+        content:
+          choose_files: 'Choose Files'
+          drag_and_drop: 'Drag And Drop'
+    no_digital_assets_found: 'No digital assets found'
