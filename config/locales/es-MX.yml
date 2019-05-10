@@ -1,0 +1,21 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es-MX:
+  spree:
+    folders:
+      editing_resource: 'Editando %{resource}'
+      success: 'La carpeta ha sido borrada exitosamente'
+      failure: '%{error_messages}'
+      new_sub_folder: 'Nueva subcarpeta'
+      new_folder: 'Nueva Carpeta'
+    admin:
+      tab:
+        digital_assets: 'Recursos digitales'
+      tab_description:
+        digital_assets: 'Recursos digitales'
+      digital_assets:
+        content:
+          choose_files: 'Seleccionar archivos'
+          drag_and_drop: 'Arrastrar y soltar'
+    no_digital_assets_found: 'No se encontraron recursos digitales'
