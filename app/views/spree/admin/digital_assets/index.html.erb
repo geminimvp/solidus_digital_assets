@@ -1,5 +1,5 @@
 <% admin_layout "full-width" %>
-<% admin_breadcrumb(link_to(plural_resource_name(Spree::DigitalAsset.new), [:admin, Spree::DigitalAsset])) %>
+<% admin_breadcrumb(plural_resource_name(Spree::DigitalAsset.new)) %>
 <% folder_breadcrumb_path(@current_folder) %>
 
 <% content_for :page_actions do %>
