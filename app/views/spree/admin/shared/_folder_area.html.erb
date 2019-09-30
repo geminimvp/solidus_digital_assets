@@ -4,7 +4,7 @@
       <%= link_to '', [:admin, folder], { title: 'Delete',
           class: 'text-danger fa fa-trash',
           method: :delete,
-          data: { confirm: Spree.t(:confirm_delete) } } %>
+          data: { confirm: I18n.t(:confirm_delete, scope: :spree) } } %>
       <a href="#" class="fa fa-pencil rename-folder" title='Update' data-toggle="modal" data-target="#add-subfolder"></a>
     <% end %>
   </div>
