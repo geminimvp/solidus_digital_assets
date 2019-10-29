@@ -4,7 +4,7 @@
 
 <% content_for :page_actions do %>
   <% if can? :manage, Spree::DigitalAsset %>
-    <%= button I18n.t(create_folder_button_text(@current_folder), scope: :spree), nil, 'button', id: 'admin_new_folder', data: { toggle: 'modal', target: '#add-subfolder' } %>
+    <%= button_tag I18n.t(create_folder_button_text(@current_folder), scope: :spree), class: 'btn btn-primary', id: 'admin_new_folder', data: { toggle: 'modal', target: '#add-subfolder' } %>
   <% end %>
 <% end %>
 
